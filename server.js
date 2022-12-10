@@ -1,5 +1,7 @@
+// dependencies 
 const express = require("express");
 
+// port
 const PORT = process.env.PORT || 5050;
 
 const app = express();
@@ -15,6 +17,7 @@ require("./routes/htmlRoutes")(app);
 
 // Wildcard route to direct users to a 404 page
 app.get('*', (req, res) =>
+// bad request / response
   res.sendFile(path.join(__dirname, 'public/pages/404.html'))
 );
 
