@@ -28,8 +28,9 @@ module.exports = (app) => {
     res.end();
   });
 
-  // app delete("api/notes...")
 
+
+  // app delete("api/notes...")
   app.delete("/api/notes/:id", (req, res) => {
     const notesId = req.params.id;
 
@@ -41,14 +42,14 @@ module.exports = (app) => {
     notesData = filterData;
 
 
-  // fs.writeFileSync(__dirname...)
-  fs.writeFileSync(__dirname + "/../db/db.json", newNoteData, (err) => {
-    if (err) throw err;
+    // fs.writeFileSync(__dirname...)
+    fs.writeFileSync(__dirname + "/../db/db.json", newNoteData, (err) => {
+      if (err) throw err;
+    });
+
+
+
+    // end
+    res.end();
   });
-
-
-
-  // end
-  res.end();
-});
 };
