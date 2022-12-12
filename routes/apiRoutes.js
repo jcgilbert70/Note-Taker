@@ -16,21 +16,39 @@ module.exports = (app) => {
     let newNotes = req.body;
     newNotes.id = uniqid();
 
+    // push new notes into notes data then stringify
+    notesData.push(newNotes)
 
     //  JSON.stringify(noetsData)
+    const passData = JSON.stringify(notesData);
+
+    fs.writeFile(__dirname + "/../db/db.json", passData, (err) => {
+      if (err) throw err;
+    });
+    res.end();
+  });
+
+  // app delete("api/notes...")
+
+  app.delete("/api/notes/:id", (req, res) => {
+    const notesId = req.params.id;
+
+    let filterData = notesData.filter(function (notes) {
+      return notes.id != notesId;
+    });
+
+    passData = JSON.stringify(filtered);
+    notesData = filterData;
 
 
-    // app delete("api/notes...")
-
-
-
-
-
-    // fs.writeFileSync(__dirname...)
-
+  // fs.writeFileSync(__dirname...)
+  fs.writeFileSync(__dirname + "/../db/db.json", newNoteData, (err) => {
+    if (err) throw err;
   });
 
 
 
-// res.end();
-}
+  // end
+  res.end();
+});
+};
