@@ -1,8 +1,8 @@
 // dependencies 
 const express = require("express");
 
-// port
-const PORT = process.env.PORT || 5050;
+// port 3001 per Heroku deployment guide
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 

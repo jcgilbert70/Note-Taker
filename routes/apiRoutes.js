@@ -47,8 +47,6 @@ module.exports = (app) => {
       if (err) throw err;
     });
 
-
-
     // end
     res.end();
   });
