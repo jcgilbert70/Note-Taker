@@ -18,7 +18,7 @@ require("./routes/htmlRoutes")(app);
 // Wildcard route to direct users to a 404 page
 app.get('*', (req, res) =>
 // bad request / response
-  res.sendFile(path.join(__dirname, 'public/pages/404.html'));
+  res.sendFile(path.join(__dirname, 'public/pages/404.html'))
 );
 
 // require to run app
