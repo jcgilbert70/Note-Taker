@@ -13,6 +13,7 @@ module.exports = (app) => {
 
   // post api notes
   app.post("/api/notes", (req, res) => {
+    
     // post route for new notes
     let newNotes = req.body;
     newNotes.id = uniqid();
@@ -38,3 +39,5 @@ module.exports = (app) => {
     res.redirect("");
   });
 };
+
+module.exports = router;
