@@ -1,16 +1,23 @@
 // dependencies 
 const express = require("express");
 
-// port 3001 per Heroku deployment guide
+// sets port 3001 per Heroku deployment guide
 const PORT = process.env.PORT || 3001;
 
+// making "express" server in node
 const app = express();
 
-// Middleware for parsing JSON and URLencoded form data
+// Middleware for parsing JSON
 app.use(express.json());
+
+
+// submission middleware, URLencoded form data
 app.use(express.urlencoded({ extended: true }));
+
+// set static folder "public"
 app.use(express.static("public"));
 
+// Map routes
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 

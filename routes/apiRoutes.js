@@ -1,53 +1,38 @@
 // dependencies 
-const fs = require("fs");
-const uniqid = require("uniqid");
+const fs = require('fs');
+const path = require('path');
+const db = require("../db/db.json");
 
 module.exports = (app) => {
-  let notesData = require(__dirname + "/../db/db.json");
-
-  app.get("/api/notes", (req, res) => {
-    //  get request / response
-    res.json(notesData);
+  //  get request / response
+  app.get("/api/notes", function(req, res) {
+    res.json(db);
   });
 
   // post api notes
-  app.post("/api/notes", (req, res) => {
-    // post route for new notes
-    let newNotes = req.body;
-    newNotes.id = uniqid();
-
-    // push new notes into notes data then stringify
-    notesData.push(newNotes)
-
-    //  JSON.stringify(noetsData)
-    const passData = JSON.stringify(notesData);
-
-    fs.writeFile(__dirname + "/../db/db.json", passData, (err) => {
-      if (err) throw err;
-    });
-    res.end();
+  app.post("/api/notes", function(req, res) {
+    db.push(req.body);
+    // add an ID for each note
+    db.forEach((item, i) => {
+      item.id = i + 1;
   });
 
+    // writeFile + JSON
+    fs.writeFile("./db/db.json", JSON.stringify(db), function() {
+      res.json(db);
+  });
+});
 
-
-  // app delete("api/notes...")
-  app.delete("/api/notes/:id", (req, res) => {
-    const notesId = req.params.id;
-
-    let filterData = notesData.filter(function (notes) {
-      return notes.id != notesId;
-    });
-
-    passData = JSON.stringify(filtered);
-    notesData = filterData;
-
-
-    // fs.writeFileSync(__dirname...)
-    fs.writeFileSync(__dirname + "/../db/db.json", passData, (err) => {
-      if (err) throw err;
-    });
-
-    // end
-    res.end();
+    //  JSON.stringify(noetsData)
+    app.delete("/api/notes/:id", (req, res) => {
+      var id = req.params.id;
+      // Delete note from array
+      db.splice(id - 1, 1);
+      // Assign new ids to remaining notes
+      db.forEach((item, i) => {
+          item.id = i + 1;
+      });
+      fs.writeFile("./db/db.json", JSON.stringify(db),
+          res.json(notes));
   });
 };

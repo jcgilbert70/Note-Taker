@@ -3,6 +3,7 @@ const path = require("path");
 
 module.exports = (app) => {
   // request / response
+  //  send user to HTML page
   app.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/notes.html"));
   });
