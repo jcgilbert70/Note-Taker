@@ -1,4 +1,5 @@
 // dependencies 
+const router = require("express").Router();
 const fs = require("fs");
 const uniqid = require("uniqid");
 
@@ -31,23 +32,9 @@ module.exports = (app) => {
 
 
   // app delete("api/notes...")
-  app.delete("/api/notes/:id", (req, res) => {
-    const notesId = req.params.id;
-
-    let filterData = notesData.filter(function (notes) {
-      return notes.id != notesId;
-    });
-
-    passData = JSON.stringify(filtered);
-    notesData = filterData;
-
-
-    // fs.writeFileSync(__dirname...)
-    fs.writeFileSync(__dirname + "/../db/db.json", newNoteData, (err) => {
-      if (err) throw err;
-    });
-
-    // end
-    res.end();
+  router.delete("/notes/:id", (req, res) => {
+    const boundry = req.params.id;
+    db(boundry, notes);
+    res.redirect("");
   });
 };
