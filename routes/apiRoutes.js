@@ -5,6 +5,7 @@ const db = require("../db/db.json");
 
 module.exports = (app) => {
   //  get request / response
+  
   app.get("/api/notes", function(req, res) {
     res.json(db);
   });
@@ -12,6 +13,7 @@ module.exports = (app) => {
   // post api notes
   app.post("/api/notes", function(req, res) {
     db.push(req.body);
+
     // add an ID for each note
     db.forEach((item, i) => {
       item.id = i + 1;
@@ -25,13 +27,16 @@ module.exports = (app) => {
 
     //  JSON.stringify(noetsData)
     app.delete("/api/notes/:id", (req, res) => {
-      var id = req.params.id;
-      // Delete note from array
+      let id = req.params.id;
+
+      // Delete note
       db.splice(id - 1, 1);
+
       // Assign new ids to remaining notes
       db.forEach((item, i) => {
           item.id = i + 1;
       });
+      // write remaining notes
       fs.writeFile("./db/db.json", JSON.stringify(db),
           res.json(notes));
   });
