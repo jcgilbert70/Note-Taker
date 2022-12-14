@@ -59,10 +59,16 @@
   
   ## Screenshots
 
+  ```
   Landing Page
+  ```
+
   <img src="./public/assets/img/landing-page.png" width="600">
 
+  ```
   Application
+  ```
+
   <img src="./public/assets/img/application.png" width="600">
   
 
