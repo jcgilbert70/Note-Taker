@@ -59,8 +59,9 @@
   
   ## Screenshots
 
-  <img src="./public/assets/img/application.png" width="600">
   <img src="./public/assets/img/landing-page.png" width="600">
+  <img src="./public/assets/img/application.png" width="600">
+  
 
   ## Links
   Application
